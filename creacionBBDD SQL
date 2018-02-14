@@ -1,0 +1,34 @@
+create database appaita;
+
+use appaita;
+
+create table combustible 
+	(
+id_combustible smallint primary key not null auto_increment,
+l_consumidos double (255,3),
+km_recorridos double (255,3),
+l_repostados double (255,3),
+consumo float (200,3)
+	);
+
+create table cmr
+(
+id_cmr smallint primary key not null auto_increment,
+num_cmr varchar (20),
+peso float (255,3)
+);
+
+create table viajes 
+(
+id_viaje smallint primary key not null auto_increment,
+carga varchar(40),
+descarga varchar(40),
+kilometraje mediumint,
+id_combustible smallint,
+id_cmr smallint,
+fecha date,
+
+foreign key (id_combustible) references combustible (id_combustible),
+-- foreign key (id_fecha) references fechas (id_fecha),
+foreign key (id_cmr) references cmr (id_cmr)
+);

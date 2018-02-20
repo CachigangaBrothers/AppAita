@@ -1,21 +1,17 @@
 
 public class Viaje {
 
+	//atributos
 	private int idViaje;
 		private String carga;
 		private String descarga;
 		private int kilometraje;
 		private java.sql.Date fecha;
+	
+		private int idCombustible;
+		private int idCmr;
 		
-	private int idCombustible;
-		private int lConsumidos;
-		private int kmRecorridos;
-		private int lRepostados;
-		private float consumo;
-		
-	private int idCmr;
-		private int numCmr;
-		private int peso;
+		//metodos
 		public int getIdViaje() {
 			return idViaje;
 		}
@@ -52,51 +48,14 @@ public class Viaje {
 		public void setIdCombustible(int idCombustible) {
 			this.idCombustible = idCombustible;
 		}
-		public int getlConsumidos() {
-			return lConsumidos;
-		}
-		public void setlConsumidos(int lConsumidos) {
-			this.lConsumidos = lConsumidos;
-		}
-		public int getKmRecorridos() {
-			return kmRecorridos;
-		}
-		public void setKmRecorridos(int kmRecorridos) {
-			this.kmRecorridos = kmRecorridos;
-		}
-		public int getlRepostados() {
-			return lRepostados;
-		}
-		public void setlRepostados(int lRepostados) {
-			this.lRepostados = lRepostados;
-		}
-		public float getConsumo() {
-			return consumo;
-		}
-		public void setConsumo(float f) {
-			this.consumo = f;
-		}
 		public int getIdCmr() {
 			return idCmr;
 		}
 		public void setIdCmr(int idCmr) {
 			this.idCmr = idCmr;
 		}
-		public int getNumCmr() {
-			return numCmr;
-		}
-		public void setNumCmr(int numCmr) {
-			this.numCmr = numCmr;
-		}
-		public int getPeso() {
-			return peso;
-		}
-		public void setPeso(int peso) {
-			this.peso = peso;
-		}
+		
 	
-		
-		
 		
 	
 }

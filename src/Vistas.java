@@ -15,10 +15,13 @@ public class Vistas {
 		final int INSERTAR = 1;
 		final int BORRAR = 2;
 		final int ACTUALIZAR = 3;
+		final int BUSCAR = 4;
 		
 		int opcion_menuPrincipal = -1;
 		
 		ViajeModelo viajeModelo = new ViajeModelo();
+		CmrModelo cmrModelo = new CmrModelo();
+		CombustibleModelo combustibleModelo = new CombustibleModelo();
 		
 	//MENÚ PRINCIPAL (INSERTAR-BORRAR-ACTUALIZAR
 		do {
@@ -32,14 +35,23 @@ public class Vistas {
 			switch (opcion_menuPrincipal){
 			
 			case INSERTAR:
+				Cmr cmr = crearCmr();
+				Combustible combustible = crearCombustible();
+				Viaje viaje = crearViaje();
+				getIDsParaViaje(viaje, cmr, combustible);
+				cmrModelo.insertar(cmr);
+				combustibleModelo.insertar(combustible);
+				viajeModelo.insertar(crearViaje());
 				
-				viajeModelo.insertarViaje(crearViaje());
 				break;
 				
 			case BORRAR:
 				break;
 				
 			case ACTUALIZAR:
+				break;
+				
+			case BUSCAR:
 				break;
 				
 			default:
@@ -56,12 +68,11 @@ public class Vistas {
 		
 	}
 	//EN CONTRUCCIÓN   -----> AHORA SE USA UNA PLANTILLA PREDETERMINADA
-	//OBJETIVO -------------> COGER DATOS DE LA INTERFAZ Y DAR VALORES A LAS VARIABLES
+	//OBJETIVO -------------> COGER DATOS DE LA INTERFAZ Y DAR VALORES A LAS VARIABLES   ///////////////////////
 	public static Viaje crearViaje (){
 		sdf = new SimpleDateFormat();
 		Viaje viaje = new Viaje();
-		
-		
+				
 //PRUEBAAAAAAAAAAAAAAA -------> ESTOS VALORES HAY QUE COGERLOS DESDE LA INTERFAZ
 		String fecha_str = "1111-05-08"; 
 		
@@ -69,25 +80,31 @@ public class Vistas {
 		viaje.setCarga        ("G");
 		viaje.setDescarga     ("Z");
 		viaje.setKilometraje  (1012121);
-		viaje.setlConsumidos  (500);
-		viaje.setKmRecorridos (100000);
-		viaje.setlRepostados  (600);
-		viaje.setConsumo      (30);
-		viaje.setNumCmr       (99999);
-		viaje.setPeso         (98525);
 		
-		viaje.setlConsumidos  (100);
-		viaje.setKmRecorridos (1000);
-		viaje.setlRepostados  (80);
-		viaje.setConsumo      (26.5f);
-		
-		viaje.setNumCmr       (20000);
-		viaje.setPeso         (50000);
-//////////////				
 		return viaje;
 		
 	}
 	
+	public static Cmr crearCmr (){
+		Cmr cmr = new Cmr();
+		//PRUEBAAAAAAAAAAAAAAA -------> ESTOS VALORES HAY QUE COGERLOS DESDE LA INTERFAZ
+		cmr.setNumCmr       (99999);
+		cmr.setPeso         (98525);
+		
+		return cmr;
+	}
+	
+	public static Combustible crearCombustible (){
+		Combustible combustible = new Combustible();
+		//PRUEBAAAAAAAAAAAAAAA -------> ESTOS VALORES HAY QUE COGERLOS DESDE LA INTERFAZ
+		combustible.setlConsumidos  (500);
+		combustible.setKmRecorridos (100000);
+		combustible.setlRepostados  (600);
+		combustible.setConsumo      (30);
+		
+		return combustible;
+	}
+	                                                                                   /////////////////////////
 	//SI SE LE PASA UN STRING CON FORMATO YYYY-MM-DD DEVUELVE UNA FECHA SQL
 	public static java.sql.Date parseDate (String fecha){
 		
@@ -104,6 +121,13 @@ public class Vistas {
 			System.err.println("Error al parsear Fecha");
 		}
 		return sqlDate;
+	}
+	
+	public static void getIDsParaViaje(Viaje viaje, Cmr cmr, Combustible combustible){
+		
+		viaje.setIdCmr(CmrModelo.getId());
+		viaje.setIdCombustible(CombustibleModelo.getId());
+		
 	}
 
 }

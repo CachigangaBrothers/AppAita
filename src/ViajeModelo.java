@@ -29,6 +29,37 @@ public class ViajeModelo extends Conector{
 		}
 		
 	}
+	//LISTAR TODOS LOS VIAJES DE LA BASE DE DATOS SIN NINGÚN FILTRO
+	public static void listarViajes(){
+		try {
+			PreparedStatement pst = conexion.prepareStatement("select * from viajes");
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()){
+				System.out.println(rs.getInt(1) + "- " + rs.getString(2) + " - " + rs.getString(2) + " \t" +"[ " + rs.getDate(7) + " ]");
+				
+			}
+			System.out.println("SE HAN MOSTRADO TODOS LOS VIAJES.");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Error en listarViajes()");
+		}
+	}
+	
+	
+	public static void delete (int id){
+		try {
+			PreparedStatement pst = conexion.prepareStatement("DELETE FROM viajes WHERE id_viaje = ?");
+			pst.setInt(1, id);
+			pst.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("No se ha podido eliminar el registro en 'viajes'");
+
+		}
+	
+	}
 	
 	
 		

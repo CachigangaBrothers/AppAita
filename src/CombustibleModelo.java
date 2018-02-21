@@ -44,4 +44,16 @@ public class CombustibleModelo extends Conector{
 		return -1;
 		
 	}
+	
+	public static void delete (int id){
+		try {
+			PreparedStatement pst = conexion.prepareStatement("DELETE FROM combustible WHERE id_combustible = ?");
+			pst.setInt(1, id);
+			pst.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("No se ha podido eliminar el registro en 'combustible'");
+		}
+	
+	}
 }

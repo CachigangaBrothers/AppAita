@@ -46,6 +46,10 @@ public class Vistas {
 				break;
 				
 			case BORRAR:
+				ViajeModelo.listarViajes();
+				deleteViaje(pedirID());
+				
+				
 				break;
 				
 			case ACTUALIZAR:
@@ -130,6 +134,18 @@ public class Vistas {
 		
 	}
 
+	public static int pedirID(){
+		Scanner scan = new Scanner (System.in);
+		System.out.println("Selecciona --> ");
+		return scan.nextInt();
+	}
+	
+public static void deleteViaje(int id){
+	ViajeModelo.delete (id);
+	CmrModelo.delete (id);
+	CombustibleModelo.delete(id);
+	System.out.println("VIAJE ELIMINADO CON ÉXITO");
+	}
 }
 
 

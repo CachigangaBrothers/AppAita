@@ -1,5 +1,5 @@
 create database appaita;
-
+ 
 use appaita;
 
 create table combustible 

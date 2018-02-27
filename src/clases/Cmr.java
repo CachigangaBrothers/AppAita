@@ -1,3 +1,4 @@
+package clases;
 
 public class Cmr {
 	private int idCmr;

@@ -1,11 +1,21 @@
+package modelos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import clases.Cmr;
+import clases.Conector;
 
 public class CmrModelo extends Conector{
 
 	
 	
+	public CmrModelo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	//INSERTAR REGISTRO EN CMR
 	public static void insertar(Cmr cmr){
 		PreparedStatement pst;

@@ -1,13 +1,20 @@
+package vistas;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-public class Vistas {
+import clases.Cmr;
+import clases.Combustible;
+import clases.Utilidad;
+import clases.Viaje;
+import modelos.CmrModelo;
+import modelos.CombustibleModelo;
+import modelos.ViajeModelo;
 
+public class Vistas {
 	
 	private static SimpleDateFormat sdf;
 
-	
 	//MENÚ PRINCIPAL CON 3 OPCIONES (INSERTAR (hecho), BORRAR Y ACTUALIZAR)
 	public static void menuPrincipal(){
 		Scanner scan = new Scanner (System.in);
@@ -29,8 +36,11 @@ public class Vistas {
 			System.out.println(INSERTAR + "- INSERTAR");
 			System.out.println(BORRAR + "- BORRAR");
 			System.out.println(ACTUALIZAR + "- ACTUALIZAR");
+			System.out.println(BUSCAR + "- BUSCAR");
 			
 			opcion_menuPrincipal = scan.nextInt();
+			Utilidad.refrescarConsola();
+			
 			
 			switch (opcion_menuPrincipal){
 			
@@ -46,7 +56,8 @@ public class Vistas {
 				break;
 				
 			case BORRAR:
-				ViajeModelo.listarViajes();
+				
+				ViajeModelo.listarViajes(ViajeModelo.getViajes());
 				deleteViaje(pedirID());
 				
 				
@@ -56,6 +67,7 @@ public class Vistas {
 				break;
 				
 			case BUSCAR:
+				VistaBuscar.menuBuscar();
 				break;
 				
 			default:
@@ -71,6 +83,7 @@ public class Vistas {
 		
 		
 	}
+	
 	//EN CONTRUCCIÓN   -----> AHORA SE USA UNA PLANTILLA PREDETERMINADA
 	//OBJETIVO -------------> COGER DATOS DE LA INTERFAZ Y DAR VALORES A LAS VARIABLES   ///////////////////////
 	public static Viaje crearViaje (){
@@ -89,6 +102,7 @@ public class Vistas {
 		
 	}
 	
+	//CREA UN OBJETO DE TIPO CMR Y LO DEVUELVE [DAR LOS VALORES A LAS VARIABLES POR LA INTERFAZ]
 	public static Cmr crearCmr (){
 		Cmr cmr = new Cmr();
 		//PRUEBAAAAAAAAAAAAAAA -------> ESTOS VALORES HAY QUE COGERLOS DESDE LA INTERFAZ
@@ -98,6 +112,7 @@ public class Vistas {
 		return cmr;
 	}
 	
+	//CREA UN OBJETO DE TIPO COMBUSTIBLE Y LO DEVUELVE [DAR LOS VALORES A LAS VARIABLES POR LA INTERFAZ]
 	public static Combustible crearCombustible (){
 		Combustible combustible = new Combustible();
 		//PRUEBAAAAAAAAAAAAAAA -------> ESTOS VALORES HAY QUE COGERLOS DESDE LA INTERFAZ
@@ -127,26 +142,30 @@ public class Vistas {
 		return sqlDate;
 	}
 	
-	public static void getIDsParaViaje(Viaje viaje, Cmr cmr, Combustible combustible){
-		
+	//SE LE PASA UN VIAJE, CMR Y COMBUSTIBLE Y AÑADE LOS IDs DE CMR Y COMBUSTIBLE A VIAJES
+	public static void getIDsParaViaje(Viaje viaje, Cmr cmr, Combustible combustible){	
 		viaje.setIdCmr(CmrModelo.getId());
 		viaje.setIdCombustible(CombustibleModelo.getId());
 		
 	}
 
+	//PIDE UN NÚMERO ENTERO Y LO DEVUELVE
 	public static int pedirID(){
 		Scanner scan = new Scanner (System.in);
 		System.out.println("Selecciona --> ");
 		return scan.nextInt();
 	}
 	
-public static void deleteViaje(int id){
+	//DADO UN ID ELIMINA LOS REGISTROS DE LAS TABLAS CMR, COMBUSTIBLE Y VIAJES [un viaje entero]
+	public static void deleteViaje(int id){
 	ViajeModelo.delete (id);
 	CmrModelo.delete (id);
 	CombustibleModelo.delete(id);
 	System.out.println("VIAJE ELIMINADO CON ÉXITO");
 	}
-}
+	}
+
+
 
 
 

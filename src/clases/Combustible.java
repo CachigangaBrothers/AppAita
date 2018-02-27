@@ -1,3 +1,4 @@
+package clases;
 
 public class Combustible {
 	private int idCombustible;

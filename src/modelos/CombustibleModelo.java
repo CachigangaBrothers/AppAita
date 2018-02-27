@@ -1,6 +1,10 @@
+package modelos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import clases.Combustible;
+import clases.Conector;
 
 public class CombustibleModelo extends Conector{
 

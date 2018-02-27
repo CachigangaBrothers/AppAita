@@ -1,7 +1,12 @@
+package modelos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import clases.Conector;
+import clases.Viaje;
 
 public class ViajeModelo extends Conector{
 
@@ -30,14 +35,35 @@ public class ViajeModelo extends Conector{
 		
 	}
 	//LISTAR TODOS LOS VIAJES DE LA BASE DE DATOS SIN NINGÚN FILTRO
-	public static void listarViajes(){
+	public static void listarViajes(ArrayList<Viaje> viajes){
+		
+		for (int i = 0; i < viajes.size(); i++){
+			Viaje viaje = viajes.get(i);
+			System.out.println(viaje.getIdViaje() + "- " + viaje.getCarga() + "  -  " + viaje.getDescarga() + " \t [ " + viaje.getFecha() + " ]");
+		}
+			System.out.println("SE HAN MOSTRADO TODOS LOS VIAJES.");
+			
+		}
+
+	
+	
+	public static ArrayList<Viaje> getViajes(){
+		ArrayList<Viaje> lista = new ArrayList<Viaje>();
 		try {
 			PreparedStatement pst = conexion.prepareStatement("select * from viajes");
 			ResultSet rs = pst.executeQuery();
 			
 			while (rs.next()){
-				System.out.println(rs.getInt(1) + "- " + rs.getString(2) + " - " + rs.getString(2) + " \t" +"[ " + rs.getDate(7) + " ]");
-				
+				Viaje viaje = new Viaje();
+				viaje.setIdViaje(rs.getInt(1));
+				viaje.setCarga(rs.getString(2));
+				viaje.setDescarga(rs.getString(3));
+				viaje.setKilometraje(rs.getInt(4));
+				viaje.setIdCombustible(rs.getInt(5));
+				viaje.setIdCmr(rs.getInt(6));
+				viaje.setFecha(rs.getDate(7));
+
+				lista.add(viaje);
 			}
 			System.out.println("SE HAN MOSTRADO TODOS LOS VIAJES.");
 			
@@ -45,6 +71,7 @@ public class ViajeModelo extends Conector{
 			// TODO Auto-generated catch block
 			System.err.println("Error en listarViajes()");
 		}
+		return lista;
 	}
 	
 	

@@ -29,6 +29,5 @@ id_cmr smallint,
 fecha date,
 
 foreign key (id_combustible) references combustible (id_combustible) ON UPDATE CASCADE ON DELETE CASCADE,
--- foreign key (id_fecha) references fechas (id_fecha) ,
 foreign key (id_cmr) references cmr (id_cmr) ON UPDATE CASCADE ON DELETE CASCADE
 );
